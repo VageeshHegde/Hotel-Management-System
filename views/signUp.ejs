@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Sign Up</title>
+    <link rel="website icon" type="png" href="logoHotel4.png">
+    <style>
+      .position-relative {
+    position: relative;
+}
+.position-absolute {
+    position: absolute;
+}
+.top-50 {
+    top: 50%;
+}
+.translate-middle-y {
+    transform: translateY(-50%);
+}
+    </style>
+</head>
+<body>
+    <br>
+    <h1 class="text-center fw-semibold">Welcome to Our Hotel</h1>
+    <br>
+        <div class="container">
+            <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+            <div class="row align-items-center">
+              <div class="col">
+                <img src="SignUp.jpg" style="height: 60vh;">
+              </div>
+              <div class="col text-center">
+                <img src="Namaste.svg" height="50px" width="50px">
+                <br>
+                <p>Welcome to our luxurious and inviting hotel, where comfort meets elegance. Experience exceptional hospitality and top-notch amenities.</p>
+                <h3>Create an Account</h3>
+                <p>Start your journey by creating an account with us to access exclusive deals and personalized recommendations.</p>
+
+                <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Sign Up <i class="fa-solid fa-user-plus"></i>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Sign-Up Form</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="signup-form" action="/register" method="POST">
+
+          <div class="mb-3 row text-start">
+            <div class="col">
+          <label for="name" class="form-label"><i class="fa-solid fa-circle-user"></i> Name:</label>
+          </div>
+          <div class="col">
+          <input type="text" id="name" name="name" class="form-control" autocomplete="on" required>
+          </div>
+          </div>
+
+          <div class="mb-3 row text-start">
+            <div class="col">
+          <label for="phoneNumber" class="form-label"><i class="fa-solid fa-mobile-screen-button"></i> Phone Number:</label>
+          </div>
+          <div class="col">
+          <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="only 10 digit number" class="form-control" required>
+          </div>
+          </div>
+
+          <div class="mb-3 row text-start">
+            <div class="col">
+          <label for="email" class="form-label"><i class="fa-solid fa-envelope"></i> Email:</label>
+          </div>
+          <div class="col">
+          <input type="email" id="email" name="email" placeholder="example@gmail.com" class="form-control" required>
+          </div>
+          </div>
+
+          <div class="mb-3 row text-start">
+              <div class="col">
+                  <label for="password1" class="form-label"><i class="fa-solid fa-unlock"></i> Password:</label>
+              </div>
+              <div class="col position-relative">
+                  <input type="password" id="password1" class="form-control pe-5" required>
+                  <i class="fa-solid fa-eye position-absolute top-50 translate-middle-y" id="eyeIcon2" style="right:18px; display: none; cursor: pointer; opacity: 0.5;"></i>
+                  <i class="fa-solid fa-eye-slash position-absolute top-50 translate-middle-y" id="eyeIcon" style="right:18px; cursor: pointer; opacity: 0.5;"></i>
+              </div>
+          </div>
+          
+          <div class="mb-3 row text-start">
+              <div class="col">
+                  <label for="password" class="form-label"><i class="fa-solid fa-lock"></i> Confirm Password:</label>
+              </div>
+              <div class="col position-relative">
+                  <input type="password" id="password" name="password" class="form-control pe-5" required>
+                  <i class="fa-solid fa-eye position-absolute top-50 translate-middle-y" id="eyeIcon4" style="right:18px; display: none; cursor: pointer; opacity: 0.5;"></i>
+                  <i class="fa-solid fa-eye-slash position-absolute top-50 translate-middle-y" id="eyeIcon3" style="right:18px; cursor: pointer; opacity: 0.5;"></i>
+              </div>
+          </div>
+          
+
+            <div class="mb-3 text-start">
+              <label for="exampleFormControlTextarea1" class="form-label">Address <i class="fa-solid fa-address-card"></i>:</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="address" spellcheck="true" autocomplete="on" required></textarea>
+            </div>
+
+
+          <select class="form-select" aria-label="Default select example" name="type">
+            <option selected>Select User Type</option>
+            <option value="Customer"><i class="fa-solid fa-person-walking-luggage"></i> Customer</option>
+            <option value="Staff"><i class="fa-solid fa-user-tie"></i> Staff</option>
+          </select>
+
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+                <br>
+                <br>
+                <h3>Already a Member?</h3>
+                <a class="btn btn-outline-primary" href="login" role="button">Sign In <i class="fa-solid fa-right-to-bracket"></i></a>
+              </div>
+            </div>
+        </div>
+    </div>
+    <script>
+      let eyeIcon = document.getElementById("eyeIcon");
+      let eyeIcon2 = document.getElementById("eyeIcon2");
+      let password1 = document.getElementById("password1");
+  
+      eyeIcon.onclick = function() {
+          password1.type = "text";
+          eyeIcon.style.display = "none";
+          eyeIcon2.style.display = "block";
+      };
+  
+      eyeIcon2.onclick = function() {
+          password1.type = "password";
+          eyeIcon.style.display = "block";
+          eyeIcon2.style.display = "none";
+      };
+
+      let eyeIcon3 = document.getElementById("eyeIcon3");
+      let eyeIcon4 = document.getElementById("eyeIcon4");
+      let password = document.getElementById("password");
+  
+      eyeIcon3.onclick = function() {
+          password.type = "text";
+          eyeIcon3.style.display = "none";
+          eyeIcon4.style.display = "block";
+      };
+  
+      eyeIcon4.onclick = function() {
+          password.type = "password";
+          eyeIcon3.style.display = "block";
+          eyeIcon4.style.display = "none";
+      };
+    </script>  
+    <script>
+      document.getElementById('signup-form').addEventListener('submit', function(event) {
+          const name = document.getElementById('name').value;
+          const phoneNumber = document.getElementById('phoneNumber').value;
+          const email = document.getElementById('email').value;
+          const password1 = document.getElementById('password1').value;
+          const password = document.getElementById('password').value;
+          const address = document.getElementById('exampleFormControlTextarea1').value;
+          const userType = document.querySelector('select[name="type"]').value;
+  
+          if (name === '' || phoneNumber === '' || email === '' || password1 === '' || password === '' || address === '') {
+              alert('Please fill in all fields');
+              event.preventDefault(); // prevent form submission
+          } else if (!/^\d{10}$/.test(phoneNumber)) {
+              alert('Phone number must be a 10-digit number');
+              event.preventDefault(); // prevent form submission
+          } else if (!/\S+@\S+\.\S+/.test(email)) {
+              alert('Please enter a valid email address');
+              event.preventDefault(); // prevent form submission
+          } else if (password1 !== password) {
+              alert('Passwords do not match');
+              event.preventDefault(); // prevent form submission
+          } else if (userType !== 'Customer' && userType !== 'Staff') {
+              alert('Please select a valid user type');
+              event.preventDefault(); // prevent form submission
+          }
+      });
+  </script>  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

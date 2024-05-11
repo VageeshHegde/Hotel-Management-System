@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Form</title>
+    <link rel="website icon" type="png" href="logoHotel4.png">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    
+}
+.container{
+    width: 100%;
+    display: flex;
+    max-width: 850px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+.login{
+    width: 400px;
+}
+form{
+    width: 250px;
+    margin: 60px auto;
+}
+h1{
+    margin: 20px;
+    text-align: center;
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+p{
+    text-align: center;
+    margin: 10px;
+}
+hr{
+    border-top: 2px solid rgb(75, 178, 243);
+}
+
+.pic img{
+    width: 450px;
+    height: 100%;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+form label{
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 5px;
+}
+input{
+    width: 100%;
+    margin: 2px;
+    border: none;
+    outline: none;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+button{
+    border: none;
+    outline: none;
+    padding: 8px;
+    width: 252px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 5px;
+    background: rgb(75, 178, 243);
+}
+button:hover{
+    background: rgb(75, 74, 71);
+}
+p{
+    margin: 20px;
+}
+a{
+    color: black;
+    text-decoration: none;
+}
+a:hover{
+    color: rgb(75, 178, 243);
+    text-decoration: none;
+}
+.input-container {
+    display: flex;
+    align-items: center;
+}
+
+.input-container input {
+    flex-grow: 1; /* Allows the input to expand and fill available space */
+    margin-right: 8px; /* Provides a gap between the input and icon */
+}
+
+.input-container i {
+    cursor: pointer;
+    opacity: 0.5;
+}
+.input-container i:hover {
+    opacity: 1; /* Restores full opacity when hovered */
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login">
+            <form action="/login" method="post">
+                <h1>Login</h1>
+                <hr>
+                <p>Welcome!</p>
+                <label for="email">Email <i class="fa-solid fa-envelope"></i></label>
+                <input type="email" placeholder="abc@example.com" name="email" id="email" required>
+                <label for="password">Password <i class="fa-solid fa-unlock"></i></label>
+                <div class="input-container" style="display: flex; align-items: center; border-radius: 5px; border: 1px solid gray; width: 100%;
+                margin: 2px;
+                outline: none;
+                padding-right: 5px;">
+                    <input type="password" placeholder="Enter your password!" name="password" id="password" style="flex-grow: 1; border: none;" required>
+                    <i class="fa-solid fa-eye" id="eyeIcon2" style="display: none; cursor: pointer; opacity: 0.5;"></i>
+                    <i class="fa-solid fa-eye-slash" id="eyeIcon" style="cursor: pointer; opacity: 0.5;"></i>
+                </div>
+                <!-- Add new field for token -->
+                <label for="token">Token <i class="fa-solid fa-key"></i></label>
+                <input type="text" placeholder="enter your token" name="token" id="token" required>
+                <!-- End of new field -->
+                <button type="submit">Submit</button>
+                <p>
+                    <a href="signUp">Create Account</a>
+                </p>
+            </form>            
+        </div>
+        <div class="pic">
+            <img src="Login3.jpg" alt="some image">
+        </div>
+    </div>
+
+    <script>
+        let eyeIcon = document.getElementById("eyeIcon");
+        let eyeIcon2 = document.getElementById("eyeIcon2");
+        let password = document.getElementById("password");
+    
+        eyeIcon.onclick = function() {
+            password.type = "text";
+            eyeIcon.style.display = "none";
+            eyeIcon2.style.display = "block";
+        };
+    
+        eyeIcon2.onclick = function() {
+            password.type = "password";
+            eyeIcon.style.display = "block";
+            eyeIcon2.style.display = "none";
+        };
+    </script>    
+</body>
+</html>

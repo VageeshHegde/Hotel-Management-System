@@ -1,0 +1,579 @@
+<!-- staff.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="website icon" type="png" href="logoHotel4.png">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script>
+      window.onpageshow = function(event) {
+          if (event.persisted) {
+              window.location.reload();
+          }
+      };
+    </script>
+    <style>
+        body{
+            margin: 0%;
+            padding: 0%;
+            width: 100%;
+            box-sizing: border-box;
+            background-size: cover;
+            background-image: url('Login4.jpg');
+        }
+        .navbar-brand:hover {
+    color: rgb(129, 176, 226); 
+  }
+  /* Add this to your <style> section */
+.hidden {
+    display: none;
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark d-flex">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="staff"><i class="fa-solid fa-chart-pie"></i> DASHBOARD</a>
+          <!-- <a class="navbar-brand" href="#"><i class="fa-solid fa-user-tie"></i> ADMIN</a> -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDarkDropdown" style="margin-right: 58px;">
+            <ul class="navbar-nav p-2 flex-grow-1 justify-content-end">
+              <li class="nav-item dropdown float-end">
+                <button class="btn btn-dark dropdown-toggle float-end" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i> <%= staff.name.toUpperCase() %>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                  <li><a class="dropdown-item" href="/logoutg"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <% function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      } %>
+      <div class="container">
+    <h1 style="text-align: center;">Welcome "<%= capitalizeFirstLetter(staff.name) %>" to Admin Page</h1>
+    <div class="staff-details" style="background-color: #ddd; border-radius: 8px; padding: 10px;  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); text-align: center;">
+    <h3><i class="fa-solid fa-user-tie"></i> My Details:</h3>
+    <p><span style="font-weight: bold;">ID Number <i class="fa-solid fa-id-badge"></i>:</span> <%= staff.id %></p>
+    <p><span style="font-weight: bold;">Name <i class="fa-solid fa-address-book"></i>:</span> <%= staff.name %></p>
+    <p><span style="font-weight: bold;">Email <i class="fa-solid fa-envelope"></i>:</span> <%= staff.email %></p>
+    <p><span style="font-weight: bold;">Phone Number <i class="fa-solid fa-phone-volume"></i>:</span> <%= staff.phoneNumber %></p>
+
+    <button type="button" class="btn btn-primary" id="viewReviewsBtn">View All Reviews</button>
+    <button type="button" class="btn btn-secondary" id="viewServicesBtn">View All Service Request</button>
+    <button type="button" class="btn btn-success" id="viewBookingBtn">View All Bookings</button>
+    <button type="button" class="btn btn-danger" id="addServicesBtn">Add a Service</button>
+    <button type="button" class="btn btn-info" id="viewAmenityListBtn">View All Amenitites</button>
+    <button type="button" class="btn btn-dark" id="viewAmenitiesBtn">View All Amenities/ Room</button>
+    </div>
+    <br>
+
+    <div class="" id="search" style="margin-bottom: 100px; padding: 20px; background-color: #edebeb; border-radius: 8px;">
+      <h2>Search a Customer</h2>
+      <form action="/customer" method="GET" class="row row-cols-lg-auto g-3 align-items-center">
+        <div class="col-12">
+        <label class="form-label" for="email">Enter customer's email address:</label>
+        </div>
+        <div class="col-12">
+        <input class="form-control" type="email" id="email" name="email" placeholder="customer@example.com" required>
+        </div>
+        <div class="col-12">
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+        </div>
+      </form>
+      <br>
+      <% if (typeof req.session.customer !== 'undefined') { %>
+        <h3><i class="fa-solid fa-user"></i> Customer Details</h3>
+        <p><span style="font-weight: bold;">ID Number <i class="fa-solid fa-id-card-clip"></i>:</span> <%= req.session.customer.id %></p>
+        <p><span style="font-weight: bold;">Name <i class="fa-solid fa-address-card"></i>:</span> <%= req.session.customer.Name %></p>
+        <p><span style="font-weight: bold;">Email <i class="fa-solid fa-envelope"></i>:</span> <%= req.session.customer.email %></p>
+        <p><span style="font-weight: bold;">Phone Number <i class="fa-solid fa-phone"></i>:</span>  <%= req.session.customer.phoneNumber %></p>
+        <p><span style="font-weight: bold;">Address <i class="fa-solid fa-location-dot"></i>:</span>  <%= req.session.customer.address %></p>
+    
+        <h3><i class="fa-solid fa-calendar-days"></i> Booking Details</h3>
+        <table class="table table-striped table-hover table-bordered align-middle">
+          <thead>
+              <tr>
+                  <th>Booking ID</th>
+                  <th>Check-in</th>
+                  <th>Check-out</th>
+                  <th>Amount</th>
+                  <th>Review</th>
+                  <th>Rating</th>
+                  <th>Payment Type</th>
+                  <th>Days</th>
+                  <th>Room ID</th>
+                  <th>Breakfast</th>
+                  <th>No of People</th>
+              </tr>
+          </thead>
+          <tbody class="table-group-divider">
+              <% req.session.customer.bookings.forEach(booking => { %>
+                  <tr>
+                      <td><%= booking.bookingId %></td>
+                      <td><%= booking.checkin %></td>
+                      <td><%= booking.checkout %></td>
+                      <td><%= booking.Amount %></td>
+                      <td><%= booking.review %></td>
+                      <td><%= booking.rating %></td>
+                      <td><%= booking.payment %></td>
+                      <td><%= booking.days %></td>
+                      <td><%= booking.roomId %></td>
+                      <td><%= booking.breakfast ? 'Yes' : 'No' %></td>
+                      <td><%= booking.No_of_people %></td>
+                  </tr>
+              <% }); %>
+          </tbody>
+      </table>
+      
+    
+        <% delete req.session.customer; %>
+    <% } else if (typeof req.session.error !== 'undefined') { %>
+        <p><%= req.session.error %></p>
+        <% delete req.session.error; %>
+    <% } %>
+    </div>
+
+    <div id="reviewsTable" class="hidden" style="margin-bottom: 100px;">
+      <h5>Reviews</h5>
+    <table class="table table-striped table-hover table-bordered align-middle">
+      <caption style="color: white;">Reviews</caption>
+      <thead class="align-items-center">
+          <tr>
+              <th scope="col">Review ID</th>
+              <th scope="col">Customer Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Rating</th>
+              <th scope="col">Date</th>
+              <th scope="col">Review</th>
+          </tr>
+      </thead>
+      <tbody class="table-group-divider">
+          <% reviews.forEach(review => { %>
+              <tr>
+                  <td scope="row"><%= review.reviewID %></td>
+                  <td><%= review.Name %></td>
+                  <td><%= review.email %></td>
+                  <td><%= review.rating %></td>
+                  <td><%= review.created_at %></td>
+                  <td><%= review.review %></td>
+              </tr>
+          <% }); %>
+      </tbody>
+  </table>
+  </div>
+
+  <div id="servicesTable" class="hidden" style="margin-bottom: 100px;">
+  <h5>Services</h5>
+  <table class="table table-striped table-hover table-bordered align-middle">
+    <caption style="color: white;">Services</caption>
+    <thead class="align-items-center">
+        <tr>
+            <th scope="col">Service ID</th>
+            <th scope="col">Service Type</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Room ID</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Customer Email</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        <% services.forEach(service => { %>
+            <tr>
+                <td scope="row"><%= service.ServiceID %></td>
+                <td><%= service.serviceType %></td>
+                <td><%= service.created_at %></td>
+                <td><%= service.RoomID %></td>
+                <td><%= service.customer_name %></td>
+                <td><%= service.email %></td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>
+</div>
+
+<div id="bookingTable" class="hidden" style="margin-bottom: 100px;">
+  <h5>Booking</h5>
+<table class="table table-striped table-hover table-bordered align-middle">
+  <caption style="color: white;">Booking</caption>
+  <thead class="align-items-center">
+  <tr>
+      <th>Booking ID</th>
+      <th>Check-in</th>
+      <th>Check-out</th>
+      <th>Number of People</th>
+      <th>Days</th>
+      <th>Breakfast</th>
+      <th>Payment</th>
+      <th>Customer ID</th>
+      <th>Room ID</th>
+      <th>Staff ID</th>
+      <th>Receipt ID</th>
+      <th>Checked-in</th>
+      <th>Checked-out</th>
+  </tr>
+  </thead>
+  <tbody class="table-group-divider">
+  <% bookings.forEach(booking => { %>
+      <tr>
+          <td scope="row"><%= booking.bookingId %></td>
+          <td><%= booking.checkin %></td>
+          <td><%= booking.checkout %></td>
+          <td><%= booking.No_of_people %></td>
+          <td><%= booking.days %></td>
+          <td><%= booking.breakfast ? 'Yes' : 'No' %></td>
+          <td><%= booking.payment %></td>
+          <td><%= booking.customer %></td>
+          <td><%= booking.roomId %></td>
+          <td><%= booking.staffID %></td>
+          <td><%= booking.receiptID %></td>
+          <td><%= booking.checkedin %></td>
+          <td><%= booking.checkedout %></td>
+      </tr>
+  <% }); %>
+  </tbody>
+</table>
+</div>
+    
+<!-- Your existing EJS code -->
+<div id="bookingsTab" style="margin-bottom: 100px;" class="hidden">
+  <h5>Booking</h5>
+  <% if (bookings.length > 0) { %>
+      <table  class="table table-striped table-hover table-bordered align-middle">
+        <caption style="color: white;">Booking</caption>
+        <thead class="align-items-center">
+          <tr>
+              <th>Booking ID</th>
+              <th>Check-in</th>
+              <th>Check-out</th>
+              <th>Number of People</th>
+              <th>Payment Mode</th>
+              <th>Customer ID</th>
+              <th>Room ID</th>
+              <th>Breakfast</th>
+              <th>Days</th>
+              <th>Receipt No</th>
+              <th>Action</th>
+              <th>Staff ID</th>
+          </tr>
+        </thead>
+          <tbody class="table-group-divider">
+          <% bookings.forEach(booking => { %>
+              <tr>
+                  <td><%= booking.bookingId %></td>
+                  <td><%= new Date(booking.checkin).toLocaleString() %></td>
+                  <td><%= new Date(booking.checkout).toLocaleString() %></td>
+                  <td><%= booking.No_of_people %></td>
+                  <td><%= booking.payment %></td>
+                  <td><%= booking.customer %></td>
+                  <td><%= booking.roomId %></td>
+                  <td><%= booking.breakfast ? 'Yes' : 'No' %></td>
+                  <td><%= booking.days %></td>
+                  <td><%= booking.receiptID %></td>
+                  <td>
+                      <% const isDateInFuture = (dateString) => {
+                          const currentDate = new Date();
+                          currentDate.setHours(0, 0, 0, 0);  // Set time to midnight
+
+                          const inputDate = new Date(dateString);
+                          inputDate.setHours(0, 0, 0, 0);  // Set time to midnight
+
+                          return inputDate >= currentDate;
+                      }; %>
+                      <% if (!booking.checkedin && !booking.checkedout && isDateInFuture(booking.checkin)) { %>
+                          <form id="checkinForm_<%= booking.bookingId %>" action="/checkin" method="POST">
+                              <input type="hidden" name="bookingId" value="<%= booking.bookingId %>">
+                              <button type="submit">Check-in</button>
+                          </form>
+                      <% } else if (booking.checkedin && !booking.checkedout && isDateInFuture(booking.checkout)) { %>
+                          <form id="checkoutForm_<%= booking.bookingId %>" action="/checkout" method="POST">
+                              <input type="hidden" name="bookingId" value="<%= booking.bookingId %>">
+                              <button type="submit">Check-out</button>
+                          </form>
+                      <% } else { %>
+                          N/A
+                      <% } %>
+                  </td>
+                  <td><%= booking.staffID %></td>
+              </tr>
+          <% }); %>
+          </tbody>
+      </table>
+  <% } else { %>
+      <p>No previous bookings.</p>
+  <% } %>
+</div>
+
+<div id="amenities" class="hidden" style="margin-bottom: 100px;">
+  <h2 style="text-align: center; background-color: #edebeb; border-radius: 6px;">Rooms and Amenities</h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% let roomNumber = 0; %>
+    <% roomsAndAmenities.forEach(room => { %>
+      <% roomNumber++; %>
+      <div class="col">
+        <div class="card border-dark mb-3 h-100">
+          <% if (room.room.Roomtype === 'Deluxe Room') { %>
+            <h5 class="card-header text-dark"><i class="fa-solid fa-hotel"></i> Deluxe Room  <%= roomNumber %></h5>
+          <% } else if (room.room.Roomtype === 'Family Room') { %>
+            <h5 class="card-header text-success"><i class="fa-solid fa-shop"></i> Family Room  <%= roomNumber %></h5>
+          <% } else { %>
+            <h5 class="card-header text-primary"><i class="fa-solid fa-landmark"></i> Villa  <%= roomNumber %></h5>
+          <% } %>
+
+          <% if (roomNumber > 2) { %>
+            <% roomNumber = 0; %>
+          <% } %> 
+          <div class="card-body row">
+            <div class="col">
+            <h5 class="card-title">Room ID: <%= room.room.Roomid %></h5>
+            <p class="card-text">Price: <%= room.room.Price %> /night</p>
+            <h6>Amenities:</h6>
+            <ol>
+              <% room.amenities.forEach(amenity => { %>
+                <li><%= amenity.amenity_name %></li>
+              <% }); %>
+            </ol>
+            </div>
+            <div class="col">
+              <form action="/amenityAdd" method="POST" class="row">
+                <div class="col">
+                    <select name="amenityId" class="form-select" aria-label="Default select example">
+                        <option selected>Add Amenity</option>
+                        <% amenities.forEach(amenity => { %>
+                          <option value="<%= amenity.amenity_id %>"><%= amenity.amenity_name %></option>
+                        <% }); %>
+                    </select>
+                </div>
+                <input type="hidden" name="roomId" value="<%= room.room.Roomid %>">
+                <div class="col">
+                    <button class="btn btn-primary" type="submit"><i class="fa-solid fa-square-plus"></i></button>
+                </div>
+            </form>            
+          <br>
+          <form action="/amenityDelete" method="POST" class="row">
+            <div class="col">
+                <select name="amenityId" class="form-select" aria-label="Default select example">
+                    <option selected>Delete Amenity</option>
+                    <% amenities.forEach(amenity => { %>
+                      <option value="<%= amenity.amenity_id %>"><%= amenity.amenity_name %></option>
+                    <% }); %>
+                </select>
+            </div>
+            <input type="hidden" name="roomId" value="<%= room.room.Roomid %>">
+            <div class="col">
+                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-square-minus"></i></button>
+            </div>
+        </form>
+          </div>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+</div>
+
+<div id="amenitiesList" class="hidden" style="margin-bottom: 100px; padding: 20px; background-color: #e8f2fc; border-radius: 8px;">
+  <% if (message) { %>
+    <script>
+        // Show the message in a popup when the page loads
+        showMessage("<%= message %>");
+    </script>
+<% } %>
+<% if (message) { %>
+  <script>alert('<%= message %>');</script>
+<% } %>
+  <h2 style="text-align: center;"><i class="fa-solid fa-list"></i> List of Amenities:</h2>
+  <h5 style="text-align: center;">
+  <% 
+    let amenityNames = amenities.map(amenity => amenity.amenity_name).join(', ');
+  %>
+  <%= amenityNames %>
+  </h5>
+  <div class="row justify-content-center">
+  <!-- <form id="addAmenityForm" class="col" action="/amenities" method="POST">
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Please enter the name of the amenity that you would like to add.</label>
+      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Amenity Name" name="name" required>
+    </div>
+    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i> Add Amenity</button>
+  </form> -->
+    <form id="addAmenityForm" class="col-6" action="/amenities" method="POST" onsubmit="return showAmenities();">
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Please enter the name of the amenity that you would like to add.</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Amenity Name" name="name" required>
+      </div>
+      <button type="submit" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i> Add Amenity</button>
+    </form>    
+  <!-- <form class="col" action="/amenitiesMinus" method="POST">
+    <div class="mb-3">
+      <label for="exampleFormControlInput2" class="form-label">Please enter the name of the amenity that you would like to delete.</label>
+      <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Amenity Name" name="name" required>
+    </div>
+    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-circle-minus"></i> Delete Amenity</button>
+  </form> -->
+  </div>
+</div>
+
+<div class="hidden" id="services" style="margin-bottom: 100px; background-color: rgb(255, 240, 244); border-radius: 8px; padding: 20px;">
+  <h3 style="text-align: center;">Add a Service Request</h3>
+  <form id="serviceRequestForm"  action="/add-service-request" method="POST" onsubmit="return showService();">
+    <div class="row mb-3">
+      <div class="col">
+        <label for="formGroupExampleInput" class="form-label">Customer ID:</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example: 11" name="customer_id" required>
+      </div>
+      <div class="col">
+        <label for="formGroupExampleInput2" class="form-label">Room ID:</label>
+        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Example: 101" name="room_id" required>
+      </div>
+      <div class="col">
+        <label for="formGroupExampleInput3" class="form-label">Service Type:</label>
+        <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Example: Laundry" name="service_type" required>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+</div>
+<footer class="fixed-bottom" style="color: white;
+    background-color: rgb(69, 59, 59);
+    text-align: center;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    margin-top: 40px;
+    margin: 0%;">
+        <h5>Follow Us On <a href="#"><i class="fa-brands fa-facebook"></i></a> <a href="#"><i class="fa-brands fa-instagram"></i></a> <a href="#"><i class="fa-brands fa-youtube"></i></a> <a href="#"><i class="fa-brands fa-twitter"></i></a> <a href="#"><i class="fa-brands fa-linkedin"></i></a></h5>
+              
+        <p>&copy; 2024 Room Booking. All rights reserved.</p>
+    </footer>
+<!-- Reviews -->
+<script>
+  document.getElementById('viewReviewsBtn').addEventListener('click', function() {
+      var table = document.getElementById('reviewsTable');
+      var search = document.getElementById('search');
+      if (table.classList.contains('hidden')) {
+          table.classList.remove('hidden');
+          search.classList.add('hidden');
+      } else {
+          table.classList.add('hidden');
+          search.classList.remove('hidden');
+      }
+  });
+
+  document.getElementById('viewServicesBtn').addEventListener('click', function() {
+      var table = document.getElementById('servicesTable');
+      var search = document.getElementById('search');
+      if (table.classList.contains('hidden')) {
+          table.classList.remove('hidden');
+          search.classList.add('hidden');
+      } else {
+          table.classList.add('hidden');
+          search.classList.remove('hidden');
+      }
+  });
+
+  document.getElementById('viewAmenitiesBtn').addEventListener('click', function() {
+      var table = document.getElementById('amenities');
+      var search = document.getElementById('search');
+      if (table.classList.contains('hidden')) {
+          table.classList.remove('hidden');
+          search.classList.add('hidden');
+      } else {
+          table.classList.add('hidden');
+          search.classList.remove('hidden');
+      }
+  });
+
+  document.getElementById('viewBookingBtn').addEventListener('click', function() {
+      var table = document.getElementById('bookingsTab');
+      var search = document.getElementById('search');
+      if (table.classList.contains('hidden')) {
+          table.classList.remove('hidden');
+          search.classList.add('hidden');
+      } else {
+          table.classList.add('hidden');
+          search.classList.remove('hidden');
+      }
+  });
+
+  document.getElementById('viewAmenityListBtn').addEventListener('click', function() {
+      var table = document.getElementById('amenitiesList');
+      var search = document.getElementById('search');
+      if (table.classList.contains('hidden')) {
+          table.classList.remove('hidden');
+          search.classList.add('hidden');
+      } else {
+          table.classList.add('hidden');
+          search.classList.remove('hidden');
+      }
+  });
+
+  document.getElementById('addServicesBtn').addEventListener('click', function() {
+      var table = document.getElementById('services');
+      var search = document.getElementById('search');
+      if (table.classList.contains('hidden')) {
+          table.classList.remove('hidden');
+          search.classList.add('hidden');
+      } else {
+          table.classList.add('hidden');
+          search.classList.remove('hidden');
+      }
+  });
+</script>
+<script>
+  function validateForm() {
+      const amenityName = document.getElementById('exampleFormControlInput1').value;
+      if (amenityName.trim() === '') {
+          alert('Please enter a valid amenity name.');
+          return false;
+      } else {
+          alert('Amenity added successfully.');
+          return true;
+      }
+  }
+</script>
+<script>
+  function validateForm() {
+    const customerId = document.getElementById('formGroupExampleInput').value;
+    const roomId = document.getElementById('formGroupExampleInput2').value;
+    const serviceType = document.getElementById('formGroupExampleInput3').value;
+  
+    if (customerId === '' || isNaN(customerId) || roomId === '' || isNaN(roomId) || serviceType === '') {
+      alert('Please fill out all fields with valid data.');
+      return false;
+    }
+    else{
+      alert('Service request added successfully.');
+      return true;
+    }
+  }
+  </script>
+  <script>
+    function showService() {
+        alert('Service request added successfully.!');
+        return true; // Allow the form to be submitted
+    }
+</script>
+<script>
+  function showAmenities() {
+      alert('Amenity added successfully!');
+      return true; // Allow the form to be submitted
+  }
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

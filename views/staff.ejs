@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff</title>
+    <link rel="website icon" type="png" href="logoHotel4.png">
+    <script>
+        window.onpageshow = function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        };
+    </script>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+        body{
+            margin: 0%;
+            padding: 0%;
+            width: 100%;
+            box-sizing: border-box;
+            background-size: cover;
+        }
+        .navbar-brand:hover {
+    color: rgb(129, 176, 226); 
+  }
+    </style>
+</head>
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark d-flex">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><i class="fa-solid fa-chart-pie"></i> DASHBOARD</a>
+          <a class="navbar-brand" href="admin"><i class="fa-solid fa-user-tie"></i> ADMIN</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDarkDropdown" style="margin-right: 58px;">
+            <ul class="navbar-nav p-2 flex-grow-1 justify-content-end">
+              <li class="nav-item dropdown float-end">
+                <button class="btn btn-dark dropdown-toggle float-end" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i> <%= staffName.toUpperCase() %>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                  <li><a class="dropdown-item" href="/logoutg"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <% function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      } %>
+
+    <div class="container">
+        <h1 style="text-align: center;">Welcome "<%= capitalizeFirstLetter(staffName) %>" to the Staff Dashboard</h1>
+        <br>
+        <div class="row row-cols-1 row-cols-md-5 g-4">
+            <div class="col">
+        <div class="card text-bg-primary mb-3 h-100">
+            <div class="card-header"><i class="fa-solid fa-person-walking-luggage"></i> Customers</div>
+            <div class="card-body text-center">
+              <h5 class="card-title"><span style="color: #b3ecff;"><b><%= nameCount %></b></span> Total Customers</h5>
+            </div>
+          </div>
+          </div>
+          <div class="col">
+          <div class="card text-bg-secondary mb-3 h-100">
+            <div class="card-header"><i class="fa-solid fa-chart-line"></i> Reservations</div>
+            <div class="card-body text-center">
+              <h5 class="card-title"><span style="color: #ebebe0;"><b><%= bookingCount %></b></span> Total Reservations</h5>
+            </div>
+          </div>
+          </div>
+          <div class="col">
+          <div class="card text-bg-success mb-3 h-100">
+            <div class="card-header"><i class="fa-solid fa-person-shelter"></i> Rooms</div>
+            <div class="card-body text-center">
+              <h5 class="card-title"><span style="color:  #c6ffb3;"><b><%= totalRooms %></b></span> Total Rooms</h5>
+            </div>
+          </div>
+          </div>
+          <div class="col">
+          <div class="card text-bg-danger mb-3 h-100">
+            <div class="card-header"><i class="fa-solid fa-clipboard-user"></i> Staff</div>
+            <div class="card-body text-center">
+              <h5 class="card-title"><span style="color: #ffc2b3;"><b><%= staffCount %></b></span> Total Staff Members</h5>
+            </div>
+          </div>
+          </div>
+          <div class="col">
+            <div class="card text-bg-light mb-3 h-100">
+              <div class="card-header"><i class="fa-solid fa-kitchen-set"></i> Amenities</div>
+              <div class="card-body text-center">
+                <h5 class="card-title"><span style="color:  black;"><b><%= totalAmenities %></b></span> Total Amenities</h5>
+              </div>
+            </div>
+        </div>
+        </div>
+        <br>
+        <div class="row row-cols-1 row-cols-md-5 g-4">
+            <div class="col">
+        <div class="card text-bg-warning mb-3 h-100">
+            <div class="card-header"><i class="fa-solid fa-message"></i> Reviews</div>
+            <div class="card-body text-center">
+              <h5 class="card-title"><span style="color: black;"><b><%= totalReviews %></b></span> Total Reviews</h5>
+            </div>
+          </div>
+          </div>
+          <div class="col">
+            <div class="card text-bg-light mb-3 h-100">
+              <div class="card-header"><i class="fa-regular fa-star-half-stroke"></i> Rating</div>
+              <div class="card-body text-center">
+                <h5 class="card-title"><span style="color:  black;"><b><%= avgRating %></b></span>/ 5</h5>
+              </div>
+            </div>
+            </div>
+          <div class="col">
+          <div class="card text-bg-info mb-3 h-100">
+            <div class="card-header"><i class="fa-solid fa-money-check-dollar"></i> Amount</div>
+            <div class="card-body text-center">
+              <h5 class="card-title"><span style="color: black;"><b><%= totalAmount %></b></span>$ Total Money Collected</h5>
+            </div>
+          </div>
+          </div>
+          <div class="col">
+          <div class="card text-bg-secondary mb-3 h-100">
+            <div class="card-header"><i class="fa-solid fa-diagram-project"></i> Service Types</div>
+            <div class="card-body text-center">
+              <h5 class="card-title"><span style="color:  rgb(211, 208, 208);"><b><%= uniqueServiceTypesCount %></b></span> Total Service Types</h5>
+            </div>
+          </div>
+          </div>
+          <div class="col">
+          <div class="card text-bg-dark mb-3 h-100">
+            <div class="card-header"><i class="fa-solid fa-cart-flatbed-suitcase"></i> Services</div>
+            <div class="card-body text-center">
+              <h5 class="card-title"><span style="color: #cfcbca;"><b><%= totalServices %></b></span> Total Service Request</h5>
+            </div>
+          </div>
+          </div>
+        </div>
+    <!-- <button type="button" class="btn btn-outline-warning"><%= totalCustomers %> Total Customers</button>
+        <button type="button" class="btn btn-outline-warning" style="width: 400px; height: 90px;">
+          <h1><%= totalCustomers %> Total Customers</h1>
+        </button>
+        <button type="button" class="btn btn-outline-success" style="width: 400px; height: 90px;">
+            <h1><%= totalRooms %> Total Rooms</h1>
+        </button> -->
+            
+    <!-- <h2>Room Counts</h2>
+    <ul>
+        <% data.forEach((count, index) => { %>
+            <li>Room <%= index + 101 %>: <%= count %></li>
+        <% }); %>
+    </ul>
+    <button type="button" class="btn btn-outline-success" style="width: 200px; height: 50px;">
+        <%= totalRooms %> Total Rooms
+    </button>
+
+    <h3>Room Counts</h3>
+    <ul>
+        <% for (let i = 0; i < data.length; i++) { %>
+            <li>Room <%= i + 101 %>: <%= data[i] %></li>
+        <% } %>
+    </ul> -->
+    <br>
+    <div style="width: 100%;">
+        <div style="width: 49%; height: 400px; float:left; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3); background-color: #f3f2f2; border-radius: 9px; padding: 9px;">
+            <h5 style="color: rgb(232, 162, 69);"><i class="fa-solid fa-star"></i> Rating Details</h5>
+            <canvas id="myChart4" style="background-color: white;"></canvas>
+        </div>
+        <div style="width: 49%; height: 400px; float: right; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3); background-color: #f3f2f2; border-radius: 9px; padding: 9px;">
+            <h5 style="color: rgb(232, 162, 69);"><i class="fa-solid fa-sack-dollar"></i> Payment Details</h5>
+            <canvas id="myChart3" style="background-color: white;"></canvas>
+        </div>
+    </div>
+    <div style="width: 100%;">
+    <div style="width: 49%; height: 400px; float:left; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3); background-color: #f3f2f2; border-radius: 9px; padding: 9px; margin-top: 20px;">
+        <h5 style="color: rgb(232, 162, 69); float: left;"><i class="fa-solid fa-door-open"></i> Room Details</h5>
+        <canvas id="myChart2" style="float: right; background-color: white;"></canvas>
+    </div>
+    <div style="width: 49%; height: 400px; float: right; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3); background-color: #f3f2f2; border-radius: 9px; padding: 9px; margin-top: 20px;">
+        <h5 style="color: rgb(232, 162, 69); float: left;"><i class="fa-solid fa-mug-saucer"></i> Breakfast Details</h5>
+        <canvas id="myChart6" style="float: right; background-color: white;"></canvas>
+    </div>
+    </div>
+    <div style="width: 100%;">
+        <div style="width: 49%; height: 400px; float:left; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3); background-color: #f3f2f2; border-radius: 9px; padding: 9px; margin-top: 20px;">
+            <h5 style="color: rgb(232, 162, 69); float: left;"><i class="fa-solid fa-calendar-days"></i> Stay Duration Details</h5>
+            <canvas id="myChart7" style="background-color: white;"></canvas>
+        </div>
+        <div style="width: 49%; height: 400px; float: right; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3); background-color: #f3f2f2; border-radius: 9px; padding: 9px; margin-top: 20px;">
+            <h5 style="color: rgb(232, 162, 69); float: left;"><i class="fa-solid fa-person-circle-plus"></i> Customer Booking Details</h5>
+            <canvas id="myChart8" style="background-color: white;"></canvas>
+        </div>
+    </div>
+    <div style="width: 100%;">
+        <div style="width: 49%; height: 400px; float:left; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3); background-color: #f3f2f2; border-radius: 9px; padding: 9px; margin-top: 20px; margin-bottom: 100px;">
+            <h5 style="color: rgb(232, 162, 69); float: left;"><i class="fa-solid fa-chart-line"></i> Reservation Details</h5>
+            <canvas id="myChart10" style="background-color: white;"></canvas>
+        </div>
+        <div style="width: 49%; height: 400px; float: right; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3); background-color: #f3f2f2; border-radius: 9px; padding: 9px; margin-top: 20px; margin-bottom: 100px;">
+            <h5 style="color: rgb(232, 162, 69); float: left;"><i class="fa-solid fa-chart-column"></i> Reservation/ Year</h5>
+            <canvas id="myChart12" style="float: right; background-color: white;"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+     const data = <%- JSON.stringify(data) %>;
+
+        const ctx = document.getElementById('myChart');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Room 101', 'Room 102', 'Room 103'],
+                datasets: [{
+                    label: 'Room Count',
+                    data: data,
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+        indexAxis: 'y' // Set the index axis to y-axis
+    }
+        });
+
+
+        const ctx2 = document.getElementById('myChart2');
+        const chart2 = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ['Deluxe Room', 'Family Room', 'Villa'],
+                datasets: [{
+                    label: 'Room Count',
+                    data: data,
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                    ],
+                    hoverOffset: 4
+                }]
+            }
+        });
+
+        const paymentData = <%- JSON.stringify(paymentData) %>;
+
+const ctx3 = document.getElementById('myChart3');
+const chart3 = new Chart(ctx3, {
+    type: 'bar',
+    data: {
+        labels: Object.keys(paymentData),
+        datasets: [{
+            label: 'Payment Count',
+            data: Object.values(paymentData),
+            backgroundColor: [
+                'rgb(245, 132, 66)',
+                'rgb(66, 203, 245)',
+                'rgb(66, 245, 129)'
+            ],
+            hoverOffset: 4
+        }]
+    }
+});
+
+const ratingData = <%- JSON.stringify(ratingData) %>;
+        const ctx4 = document.getElementById('myChart4');
+        const chart4 = new Chart(ctx4, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(ratingData),
+                datasets: [{
+                    label: 'Rating Count',
+                    data: Object.values(ratingData),
+                    backgroundColor: [
+                        'rgb(223, 240, 192)',
+                        'rgb(206, 252, 3)',
+                        'rgb(252, 211, 3)',
+                        'rgb(252, 152, 3)',
+                        'rgb(252, 44, 3)'
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+        indexAxis: 'y' // Set the index axis to y-axis
+    }
+        });
+
+        const breakfastData = <%- JSON.stringify(breakfastData) %>;
+const ctx5 = document.getElementById('myChart5');
+const chart5 = new Chart(ctx5, {
+    type: 'bar',
+    data: {
+        labels: Object.keys(breakfastData),
+        datasets: [{
+            label: 'Breakfast Count',
+            data: Object.values(breakfastData),
+            backgroundColor: [
+                'rgb(223, 240, 192)',
+                'rgb(206, 252, 3)'
+            ],
+            hoverOffset: 4
+        }]
+    },
+    options: {
+        indexAxis: 'x' // Set the index axis to y-axis
+    }
+});
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx6 = document.getElementById('myChart6');
+const chart6 = new Chart(ctx6, {
+    type: 'doughnut',
+    data: {
+        labels: Object.keys(breakfastData),
+        datasets: [{
+            label: 'Breakfast Count',
+            data: Object.values(breakfastData),
+            backgroundColor: [
+                'rgb(223, 240, 192)',
+                'rgb(206, 252, 3)'
+            ],
+            hoverOffset: 4
+        }]
+    }
+});
+
+const stayDurationData = <%- JSON.stringify(stayDurationData) %>;
+const ctx7 = document.getElementById('myChart7');
+const chart7 = new Chart(ctx7, {
+    type: 'bar',
+    data: {
+        labels: Object.keys(stayDurationData),
+        datasets: [{
+            label: 'Stay Duration Count',
+            data: Object.values(stayDurationData),
+            backgroundColor: [
+                'rgb(167, 242, 238)',
+                'rgb(52, 235, 213)',
+                'rgb(3, 202, 252)',
+                'rgb(52, 125, 235)',
+                'rgb(79, 52, 235)'
+            ],
+            hoverOffset: 4
+        }]
+    },
+    options: {
+        indexAxis: 'y' // Set the index axis to y-axis
+    }
+});
+
+const countPeopleData = <%- JSON.stringify(countPeopleData) %>;
+const ctx8 = document.getElementById('myChart8');
+const chart8 = new Chart(ctx8, {
+    type: 'bar',
+    data: {
+        labels: Object.keys(countPeopleData),
+        datasets: [{
+            label: 'Customers Booking',
+            data: Object.values(countPeopleData),
+            backgroundColor: [
+                'rgb(167, 242, 238)',
+                'rgb(40, 237, 60)',
+                'rgb(235, 64, 52)'
+            ],
+            hoverOffset: 4
+        }]
+    },
+    options: {
+        indexAxis: 'y' // Set the index axis to y-axis
+    }
+});
+
+const year = <%- JSON.stringify(bookingData) %>;
+const ctx9 = document.getElementById('myChart9');
+const chart9 = new Chart(ctx9, {
+    type: 'line',
+    data: {
+        labels: Object.keys(year),
+        datasets: [{
+            label: 'Customers Booking',
+            data: Object.values(year),
+            backgroundColor: [
+                'rgb(167, 242, 238)',
+                'rgb(40, 237, 60)',
+                'rgb(235, 64, 52)'
+            ],
+            hoverOffset: 4
+        }]
+    },
+    options: {
+        indexAxis: 'x' // Set the index axis to y-axis
+    }
+});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const bookingData = JSON.parse('<%- bookingData %>');
+      
+        // Extracting labels and data for the chart
+        const labels = bookingData.map(data => data.monthYear);
+        const data10 = bookingData.map(data => data.bookingCount);
+      
+        const ctx10 = document.getElementById('myChart10').getContext('2d');
+        const bookingChart = new Chart(ctx10, {
+          type: 'line', // Use a line chart
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Monthly Booking Counts',
+              data: data10,
+              fill: false,
+              borderColor: 'rgb(75, 192, 192)',
+              tension: 0.1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+
+
+        const bookingData3 = <%- JSON.stringify(bookingDataYear) %>;
+
+        const years3 = bookingData3.map(data => data.Year);
+        const bookingCounts3 = bookingData3.map(data => data.BookingCount);
+
+        const ctx12 = document.getElementById('myChart12');
+const chart12 = new Chart(ctx12, {
+    type: 'bar',
+    data: {
+        labels: years3,
+        datasets: [{
+            label: 'Booking Counts By Year',
+            data: bookingCounts3,
+            backgroundColor: [
+            'rgb(255, 255, 102)',
+                        'rgb(0, 255, 0)',
+                        'rgb(255, 80, 80)',
+                        'rgb(7, 86, 242)'
+            ],
+            hoverOffset: 4
+        }]
+    }
+});
+</script>
+    </div>
+    <footer class="fixed-bottom" style="color: white;
+    background-color: rgb(69, 59, 59);
+    text-align: center;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    margin-top: 40px;
+    margin: 0%;">
+        <h5>Follow Us On <a href="#"><i class="fa-brands fa-facebook"></i></a> <a href="#"><i class="fa-brands fa-instagram"></i></a> <a href="#"><i class="fa-brands fa-youtube"></i></a> <a href="#"><i class="fa-brands fa-twitter"></i></a> <a href="#"><i class="fa-brands fa-linkedin"></i></a></h5>
+              
+        <p>&copy; 2024 Room Booking. All rights reserved.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
